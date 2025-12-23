@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nada Yakout - Portfolio</title>
+    <!-- AOS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <!-- Animate.css Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        /* ==================== Global Styles ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --text-color: #eaeaea;
+            --bg-color: #0f0f1e;
+            --card-bg: #1a1a2e;
+            --shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        /* ==================== Navigation Bar ==================== */
+        nav {
+            background: var(--primary-color);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ==================== Sections ==================== */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--text-color);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #3498db, #e74c3c);
+        }
+
+        /* ==================== Home Section ==================== */
+        #home {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: 2rem auto;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: float 3s ease-in-out infinite;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-img input[type="file"] {
+            display: none;
+        }
+
+        .upload-hint {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.7rem;
+            background: rgba(0,0,0,0.7);
+            padding: 5px 10px;
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .profile-img:hover .upload-hint {
+            opacity: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-180deg) scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0) scale(1);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(102, 126, 234, 0.5),
+                            0 0 10px rgba(102, 126, 234, 0.4),
+                            0 0 15px rgba(102, 126, 234, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 10px rgba(102, 126, 234, 0.8),
+                            0 0 20px rgba(102, 126, 234, 0.6),
+                            0 0 30px rgba(102, 126, 234, 0.4);
+            }
+        }
+
+        .home-content p {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .home-content h1 {
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            animation: pulse 0.5s ease;
+        }
+
+        /* ==================== About Section ==================== */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-img-container {
+            width: 100%;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .about-img input[type="file"] {
+            display: none;
+        }
+
+        .upload-hint-about {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.7);
+            padding: 8px 15px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .about-img:hover .upload-hint-about {
+            opacity: 1;
+        }
+
+        .about-text {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .education-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        /* ==================== Skills Section ==================== */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            animation: glow 1.5s ease-in-out infinite;
+        }
+
+        .skill-card h3 {
+            color: #3498db;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-card li:before {
+            content: '✓';
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* ==================== Hobbies Section ==================== */
+        .hobbies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .hobby-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hobby-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: var(--transition);
+        }
+
+        .hobby-card:hover::before {
+            animation: shine 1.5s ease;
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+        }
+
+        .hobby-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hobby-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .hobby-card p {
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .hobby-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        /* ==================== Certifications Section ==================== */
+        .certifications-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .certification-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 5px solid transparent;
+        }
+
+        .certification-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+            border-left-color: #667eea;
+        }
+
+        .cert-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cert-icon {
+            font-size: 2.5rem;
+            animation: rotateIn 1s ease;
+        }
+
+        .cert-title {
+            flex: 1;
+        }
+
+        .cert-title h3 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        .cert-title p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .cert-body {
+            padding: 1.5rem;
+        }
+
+        .cert-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .cert-topics {
+            margin-top: 1rem;
+        }
+
+        .cert-topics h4 {
+            color: #667eea;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .cert-topics ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cert-topics li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-color);
+        }
+
+        .cert-topics li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .cert-instructors {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .instructor {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .cert-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        /* ==================== Projects Section ==================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .project-body {
+            padding: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        [data-theme="dark"] .tag {
+            background: #1a237e;
+            color: #90caf9;
+        }
+
+        /* ==================== Contact Section ==================== */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            color: #0077b5;
+        }
+
+        .social-links a:nth-child(2):hover {
+            color: #333;
+        }
+
+        [data-theme="dark"] .social-links a:nth-child(2):hover {
+            color: #fff;
+        }
+
+        .social-links svg {
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            transition: var(--transition);
+        }
+
+        .social-links a:hover svg {
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.2));
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* ==================== Footer ==================== */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* ==================== Responsive Design ==================== */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary-color);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 4rem 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certifications-container {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hobbies-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== Scroll to Top Button ==================== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== Navigation ==================== -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Nada Yakout</div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()">🌓</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==================== Home Section ==================== -->
+    <section id="home">
+        <div class="home-content">
+            <div class="profile-img animate__animated animate__bounceIn" onclick="document.getElementById('imageUpload').click()">
+                <span id="profileInitial">NY</span>
+                <input type="file" id="imageUpload" accept="image/*" onchange="loadImage(event)">
+                <span class="upload-hint">📷 Click to upload photo</span>
+            </div>
+            <h1 class="animate__animated animate__fadeInDown">Nada Yakout Shahein</h1>
+            <p class="animate__animated animate__fadeInUp">Front-end Developer | Network Engineering</p>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">Building scalable applications with passion for problem-solving and innovation</p>
+            <div class="cta-buttons animate__animated animate__fadeInUp animate__delay-2s">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-secondary">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== About Section ==================== -->
+    <section id="about">
+        <h2 data-aos="fade-up">About Me</h2>
+        <div class="about-content">
+            <div class="about-img-container" data-aos="fade-right" data-aos-duration="1000">
+                <div class="about-img" onclick="document.getElementById('aboutImageUpload').click()">
+                    <span id="aboutInitial">👤</span>
+                    <input type="file" id="aboutImageUpload" accept="image/*" onchange="loadAboutImage(event)">
+                    <span class="upload-hint-about">📷 Click to upload</span>
+                </div>
+            </div>
+            <div class="about-text" data-aos="fade-left" data-aos-duration="1000">
+                <h3>Career Objective</h3>
+                <p>Seeking an opportunity to apply my technical expertise in Networking & Software Development to support organizational growth. Passionate about problem-solving, security, and building scalable applications. Eager to contribute in a fast-paced environment that fosters innovation, efficiency, and continuous learning.</p>
+                
+                <div class="education-box">
+                    <h3>🎓 Education Background</h3>
+                    <h4>Bachelor of Computer Science</h4>
+                    <p><strong>Faculty of Computers and Information, Damanhour University</strong></p>
+                    <p><strong>Duration:</strong> 2020 – 2024</p>
+                    <p><strong>Grade:</strong> Very Good</p>
+                    
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid rgba(255,255,255,0.2);">
+                        <h4>🏆 Graduation Project: MediSupport</h4>
+                        <p><strong>Role:</strong> Front-end Developer & AI Specialist</p>
+                        <p><strong>Grade:</strong> Excellent</p>
+                        <p><strong>Project Summary:</strong></p>
+                        <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                            <li>Heart Disease Prediction using AI</li>
+                            <li>Health Monitoring Dashboard</li>
+                            <li>Doctor Booking & Reviews System</li>
+                            <li>Doctor-Patient Communication Platform</li>
+                            <li>Remote Medical Examination</li>
+                            <li>Weight & BMI Calculation</li>
+                            <li>Personalized Medical Advice</li>
+                            <li>Health Education & Heart Rate Monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Skills Section ==================== -->
+    <section id="skills">
+        <h2 data-aos="fade-up">Technical Skills & Tools</h2>
+        <div class="skills-container">
+            <div class="skill-card" data-aos="flip-left" data-aos-delay="100">
+                <h3>🌐 Networking & Security</h3>
+                <ul>
+                    <li>Network Infrastructure Management</li>
+                    <li>Firewall Security</li>
+                    <li>Cisco CCNA & CCNP</li>
+                    <li>BGP & MPLS</li>
+                </ul>
+            </div>
+
+            <div class="skill-card" data-aos="flip-left" data-aos-delay="200">
+                <h3>💻 Front-end Development</h3>
+                <ul>
+                    <li>HTML5, CSS3, JavaScript (ES6)</li>
+                    <li>TypeScript, Bootstrap, jQuery, React.js</li>
+                    <li>MySQL, SQL Server</li>
+                </ul>
+            </div>
+
+            <div class="skill-card" data-aos="flip-left" data-aos-delay="300">
+                <h3>🛠️ Additional Skills</h3>
+                <ul>
+                    <li>Object-Oriented Programming (OOP)</li>
+                    <li>Data Structures & Algorithms</li>
+                    <li>Git (GitHub)</li>
+                    <li>Machine Learning Concepts</li>
+                    <li>SDLC</li>
+                </ul>
+            </div>
+
+            <div class="skill-card" data-aos="flip-left" data-aos-delay="400">
+                <h3>📊 Office & Productivity Tools</h3>
+                <ul>
+                    <li>Microsoft Office Suite</li>
+                    <li>Google Workspace</li>
+                    <li>ERD & DFD Diagrams</li>
+                </ul>
+            </div>
+
+            <div class="skill-card" data-aos="flip-left" data-aos-delay="500">
+                <h3>🎯 Soft Skills</h3>
+                <ul>
+                    <li>Creativity & Decision Making</li>
+                    <li>Communication & Analytical Thinking</li>
+                    <li>Time Management & Teamwork</li>
+                    <li>Problem Solving</li>
+                </ul>
+            </div>
+
+            <div class="skill-card" data-aos="flip-left" data-aos-delay="600">
+                <h3>🌍 Languages</h3>
+                <ul>
+                    <li>English: Very Good</li>
+                    <li>Arabic: Native</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Hobbies Section ==================== -->
+    <section id="hobbies">
+        <h2 data-aos="fade-up">My Hobbies & Interests</h2>
+        <div class="hobbies-container">
+            <div class="hobby-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="hobby-icon">📚</div>
+                <h3>Reading</h3>
+                <p>I'm passionate about reading! Books open up new worlds and perspectives. Whether it's technical documentation to enhance my coding skills, inspiring stories, or exploring new ideas - reading is my favorite way to learn and grow.</p>
+                <div class="hobby-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">📖</span>
+                        <span class="stat-label">Always Learning</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">💡</span>
+                        <span class="stat-label">New Ideas</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">🌟</span>
+                        <span class="stat-label">Inspiration</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hobby-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="hobby-icon">💻</div>
+                <h3>Continuous Learning</h3>
+                <p>Technology never stops evolving, and neither do I! I love exploring new frameworks, learning about the latest web technologies, and taking on coding challenges that push my boundaries.</p>
+                <div class="hobby-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">🚀</span>
+                        <span class="stat-label">Growth Mindset</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">⚡</span>
+                        <span class="stat-label">Innovation</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">🎯</span>
+                        <span class="stat-label">Goal-Oriented</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hobby-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="hobby-icon">🎨</div>
+                <h3>Creative Problem Solving</h3>
+                <p>I enjoy the creative aspect of coding - turning complex problems into elegant solutions, designing intuitive user interfaces, and bringing ideas to life through code.</p>
+                <div class="hobby-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">🧩</span>
+                        <span class="stat-label">Problem Solver</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">✨</span>
+                        <span class="stat-label">Creative</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">🎭</span>
+                        <span class="stat-label">Innovative</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Certifications Section ==================== -->
+    <section id="certifications">
+        <h2 data-aos="fade-up">Courses & Certifications</h2>
+        <div class="certifications-container">
+            
+            <!-- Network Diploma -->
+            <div class="certification-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="cert-header">
+                    <div class="cert-icon">🌐</div>
+                    <div class="cert-title">
+                        <h3>Network Diploma</h3>
+                        <p>Instant Training Institute</p>
+                    </div>
+                </div>
+                <div class="cert-body">
+                    <div class="cert-meta">
+                        <div class="meta-item">
+                            <span>📅</span>
+                            <span>Oct 2024 - May 2025</span>
+                        </div>
+                    </div>
+                    <div class="cert-topics">
+                        <h4>Key Topics:</h4>
+                        <ul>
+                            <li>Cisco Certified Network Associate (CCNA)</li>
+                            <li>Cisco Certified Network Professional (CCNP)</li>
+                            <li>Border Gateway Protocol (BGP)</li>
+                            <li>Multiprotocol Label Switching (MPLS)</li>
+                            <li>Microsoft Certified Solutions Associate (MCSA)</li>
+                            <li>AWS Cloud Fundamentals</li>
+                            <li>Firewall Security</li>
+                        </ul>
+                    </div>
+                    <div class="cert-badge">🎓 Professional Certificate</div>
+                </div>
+            </div>
+
+            <!-- AI Training -->
+            <div class="certification-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="cert-header">
+                    <div class="cert-icon">🤖</div>
+                    <div class="cert-title">
+                        <h3>Artificial Intelligence (AI) Training</h3>
+                        <p>National Telecommunication Institute (NTI)</p>
+                    </div>
+                </div>
+                <div class="cert-body">
+                    <div class="cert-meta">
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>4 weeks (120 hours)</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>📅</span>
+                            <span>August 2023</span>
+                        </div>
+                    </div>
+                    <div class="cert-topics">
+                        <h4>Description:</h4>
+                        <p style="line-height: 1.8; margin-top: 0.5rem;">
+                            Comprehensive training covering AI concepts, communication skills, leadership development, freelancing strategies, and information security fundamentals.
+                        </p>
+                    </div>
+                    <div class="cert-instructors">
+                        <div class="instructor">
+                            <span>👨‍🏫</span>
+                            <span><strong>Prof. Ahmed Khattab</strong> - NTI Director</span>
+                        </div>
+                        <div class="instructor">
+                            <span>👨‍💼</span>
+                            <span><strong>Eng. Ahmed El Zaher</strong> - ITIDA CEO</span>
+                        </div>
+                    </div>
+                    <div class="cert-badge">🏆 Certified - 120 Hours</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== Projects/Experience Section ==================== -->
+    <section id="projects">
+        <h2 data-aos="fade-up">Professional Experience & Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="project-header">
+                    <h3>Front-End Developer</h3>
+                    <p>Almoptaker ElArapy for Programming – Egypt</p>
+                    <p>Jan 2025 – Present</p>
+                </div>
+                <div class="project-body">
+                    <p>Currently working on developing responsive and user-friendly web interfaces using modern technologies.</p>
+                    <ul>
+                        <li>Developing responsive web interfaces using HTML5, CSS3, JavaScript (ES6), and React.js</li>
+                        <li>Collaborating with designers and back-end developers to create integrated and scalable solutions</li>
+                        <li>Building reusable components and optimizing performance for better user experience</li>
+                        <li>Ensuring cross-browser compatibility and mobile responsiveness across different devices</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">React.js</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="project-header">
+                    <h3>Graduation Project: MediSupport</h3>
+                    <p>Damanhour University - Health & Medical Platform</p>
+                    <p>2024</p>
+                </div>
+                <div class="project-body">
+                    <p><strong>⭐ Excellent Grade</strong></p>
+                    <p><strong>Role:</strong> Front-end Developer & AI Specialist</p>
+                    <p style="margin-top: 1rem;">Comprehensive health monitoring and medical consultation platform powered by AI technology, designed to connect patients with healthcare providers and provide intelligent health insights.</p>
+                    <h4 style="margin-top: 1rem; color: #667eea;">Key Features:</h4>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>🤖 AI-Powered Heart Disease Prediction</li>
+                        <li>📊 Real-time Health Monitoring Dashboard</li>
+                        <li>👨‍⚕️ Doctor Booking & Reviews System</li>
+                        <li>💬 Doctor-Patient Communication Platform</li>
+                        <li>🏥 Remote Medical Examination</li>
+                        <li>⚖️ Weight & BMI Calculation</li>
+                        <li>📈 Blood Pressure Monitoring</li>
+                        <li>💊 Personalized Medical Advice</li>
+                        <li>📚 Health Education Resources</li>
+                        <li>❤️ Heart Rate Monitoring</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">React.js</span>
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Healthcare AI</span>
+                        <span class="tag">Node.js</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="project-header">
+                    <h3>Network Infrastructure Projects</h3>
+                    <p>Academic & Professional Training</p>
+                </div>
+                <div class="project-body">
+                    <p>Implemented various networking solutions and configurations.</p>
+                    <ul>
+                        <li>Cisco Router & Switch Configuration</li>
+                        <li>Network Security Implementation</li>
+                        <li>BGP & MPLS Protocol Configuration</li>
+                        <li>Firewall Setup & Management</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">Cisco</span>
+                        <span class="tag">CCNA</span>
+                        <span class="tag">CCNP</span>
+                        <span class="tag">Network Security</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Contact Section ==================== -->
+    <section id="contact">
+        <h2 data-aos="fade-up">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p>nadayakout17@gmail.com</p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-icon">📱</div>
+                    <h3>Phone</h3>
+                    <p>01556262261</p>
+                </div>
+                <div class="contact-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="contact-icon">📍</div>
+                    <h3>Location</h3>
+                    <p>El-Behera Governorate, Damanhour, Egypt</p>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="https://linkedin.com/in/your-profile" target="_blank" title="LinkedIn">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/your-username" target="_blank" title="GitHub">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="contact-form" data-aos="fade-up" data-aos-delay="400">
+                <h3>Send Me a Message</h3>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Footer ==================== -->
+    <footer>
+        <p>&copy; 2025 Nada Yakout Shahein. All Rights Reserved.</p>
+    </footer>
+
+    <!-- ==================== Scroll to Top Button ==================== -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
+
+    <!-- AOS Animation Library Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // ==================== Initialize AOS Animation ====================
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true,
+            offset: 100
+        });
+
+        // ==================== Theme Toggle ==================== 
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        // ==================== Mobile Menu Toggle ====================
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // ==================== Smooth Scrolling ====================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ==================== Scroll to Top Button ====================
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==================== Form Submission ====================
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            e.target.reset();
+        }
+
+        // ==================== Handle Profile Image Upload ====================
+        function loadImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const profileDiv = document.querySelector('.profile-img');
+                    profileDiv.style.backgroundImage = `url(${e.target.result})`;
+                    profileDiv.style.backgroundSize = 'cover';
+                    profileDiv.style.backgroundPosition = 'center';
+                    document.getElementById('profileInitial').style.display = 'none';
+                    
+                    // Save image to localStorage
+                    localStorage.setItem('profileImage', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Load saved profile image on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedImage = localStorage.getItem('profileImage');
+            if (savedImage) {
+                const profileDiv = document.querySelector('.profile-img');
+                profileDiv.style.backgroundImage = `url(${savedImage})`;
+                profileDiv.style.backgroundSize = 'cover';
+                profileDiv.style.backgroundPosition = 'center';
+                document.getElementById('profileInitial').style.display = 'none';
+            }
+
+            // Load saved about image
+            const savedAboutImage = localStorage.getItem('aboutImage');
+            if (savedAboutImage) {
+                const aboutDiv = document.querySelector('.about-img');
+                aboutDiv.style.backgroundImage = `url(${savedAboutImage})`;
+                aboutDiv.style.backgroundSize = 'cover';
+                aboutDiv.style.backgroundPosition = 'center';
+                document.getElementById('aboutInitial').style.display = 'none';
+            }
+        });
+
+        // ==================== Handle About Image Upload ====================
+        function loadAboutImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const aboutDiv = document.querySelector('.about-img');
+                    aboutDiv.style.backgroundImage = `url(${e.target.result})`;
+                    aboutDiv.style.backgroundSize = 'cover';
+                    aboutDiv.style.backgroundPosition = 'center';
+                    document.getElementById('aboutInitial').style.display = 'none';
+                    
+                    // Save image to localStorage
+                    localStorage.setItem('aboutImage', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // ==================== Animations on Scroll ====================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Removed duplicate animation initialization since we're using AOS now
+
+        // ==================== Handle Profile Image Upload ====================
+        // You can replace the image URL below with your uploaded image link
+        // To use your image: Upload it to imgur.com or any image hosting service
+        // Then replace the src in the HTML above with the direct image link
+    </script>
+</body>
+</html>
